@@ -2,7 +2,7 @@
 FROM mongo:latest
 
 # Install dependencies
-RUN apt-get update && apt-get install -y cron curl apt-transport-https lsb-release gnupg dos2unix
+RUN apt-get update && apt-get install -y cron curl apt-transport-https lsb-release gnupg dos2unix wc
 
 # Install Azure CLI
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash

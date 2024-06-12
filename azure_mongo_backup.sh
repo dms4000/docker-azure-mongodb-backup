@@ -28,5 +28,14 @@ rm -rf $BACKUP_DIR
 rm ${BACKUP_DIR}.tar.gz
 
 # Find and delete backups older than retention period in blob storage
-# OLD_DATE=$(date -d "-${RETENTION_DAYS} days" +%F)
-# az storage blob delete --account-name $AZURE_STORAGE_ACCOUNT --account-key $AZURE_STORAGE_KEY --container-name $AZURE_STORAGE_CONTAINER --name ${OLD_DATE}.tar.gz
+
+NUMBER_OF_EXISTING_FILES=$(exec az storage blob list\
+    --account-name $AZURE_STORAGE_ACCOUNT\
+    --account-key $AZURE_STORAGE_KEY\
+    --container-name $AZURE_STORAGE_CONTAINER\
+    | grep 'name' | wc -l)
+
+if [[ "$NUMBER_OF_EXISTING_FILES" -ge "$RETENTION_DAYS" ]] ; then
+    OLD_DATE=$(date -d "-${RETENTION_DAYS} days" +%F)
+    az storage blob delete --account-name $AZURE_STORAGE_ACCOUNT --account-key $AZURE_STORAGE_KEY --container-name $AZURE_STORAGE_CONTAINER --name ${OLD_DATE}.tar.gz
+fi
