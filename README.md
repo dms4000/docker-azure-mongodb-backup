@@ -1,5 +1,6 @@
 # docker-azure-mongodb-backup
 
+The script helps to make backup of your Azure mongoDB every day.
 
 
 ## .env File
