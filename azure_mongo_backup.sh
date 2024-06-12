@@ -3,8 +3,6 @@
 # Load environment variables
 source /env/.env
 
-
-
 # Variables
 BACKUP_DIR="./$(date +%F)"
 RETENTION_DAYS=7
@@ -19,8 +17,6 @@ mongodump --host $HOST --port $PORT --username $USER --password $PASSWORD --auth
 # Compress the backup
 #tar -czf ${BACKUP_DIR}.tar.gz -C ./ $(date +%F)
 tar -czf ${BACKUP_DIR}.tar.gz $(date +%F)
-
-
 
 # Upload to Azure Blob Storage
 # Export variables to ensure they are available to child processes
