@@ -12,7 +12,7 @@
 PORT=\
 USER=\
 PASSWORD=\
-AUTH_DB=
+AUTH_DB=admin
 
 ### Azure storage credentials
 
