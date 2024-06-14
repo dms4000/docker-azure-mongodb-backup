@@ -28,6 +28,6 @@ By default this scipt runs job at 04:00 AM every day. You can edit Dockerfile to
 
 ### Build and push your Docker image to ACR:
 
-> docker build -t mongodb-backup .\
-docker tag mongodb-backup **MyContainerRegistry**.azurecr.io/azure_mongo_backup:latest\
+> docker build -t azure_mongo_backup .\
+docker tag azure_mongo_backup **MyContainerRegistry**.azurecr.io/azure_mongo_backup:latest\
 docker push **MyContainerRegistry**.azurecr.io/azure_mongo_backup:latest
