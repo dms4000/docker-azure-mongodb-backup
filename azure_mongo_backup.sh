@@ -2,6 +2,7 @@
 
 # Load environment variables
 source /env/.env
+#source .env
 
 # Variables
 BACKUP_DIR="./$(date +%F)"
@@ -40,4 +41,6 @@ if [[ "$NUMBER_OF_EXISTING_FILES" -ge "$RETENTION_DAYS" ]] ; then
     az storage blob delete --account-name $AZURE_STORAGE_ACCOUNT --account-key $AZURE_STORAGE_KEY --container-name $AZURE_STORAGE_CONTAINER --name ${OLD_DATE}.tar.gz
 fi
 
+echo $BODY | mail --config-verbose -s $SUBJECT $EMAIL > /var/log/azure_mongo_backup.log 2>&1
 
+logger -t azure_mongo_backup "Email sent or failed, check /var/log/azure_mongo_backup.log"

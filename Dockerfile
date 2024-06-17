@@ -2,7 +2,7 @@
 FROM mongo:latest
 
 # Install dependencies
-RUN apt-get update && apt-get install -y cron curl apt-transport-https lsb-release gnupg dos2unix coreutils
+RUN apt-get update && apt-get install -y cron curl apt-transport-https lsb-release gnupg dos2unix coreutils mailutils
 
 # Install Azure CLI
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
@@ -20,6 +20,10 @@ RUN chmod +x /usr/local/bin/azure_mongo_backup.sh
 # Set up a cron job
 RUN echo "cat /env/.env >> /etc/cron.d/mongodb-backup"
 RUN echo "0 4 * * * /usr/local/bin/azure_mongo_backup.sh >> /var/log/cron.log 2>&1" > /etc/cron.d/mongodb-backup
+
+# Set up mailx
+COPY mail.rc /etc/mail.rc
+
 
 # Give execution rights on the cron job
 RUN chmod 0644 /etc/cron.d/mongodb-backup

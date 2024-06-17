@@ -21,10 +21,26 @@ AUTH_DB=admin
 AZURE_STORAGE_CONTAINER=\
 AZURE_STORAGE_KEY=
 
+### Email credentials
+
+> EMAIL=\
+MAILX_PASSWORD=\
+SUBJECT="MongoDB Backup Status"\
+BODY="MongoDB backup completed successfully on $(date)
+
 
 By default this scipt runs job at 04:00 AM every day. You can edit Dockerfile to change it.
 
-## Deploy the container
+## mail.rc File
+
+> set smtp-use-starttls\
+set smtp=smtp:// \
+set smtp-auth=login\
+set smtp-auth-user=$EMAIL\
+set smtp-auth-password=$MAILX_PASSWORD\
+set from=$EMAIL
+
+## Deploying the container
 
 ### Build and push your Docker image to ACR:
 

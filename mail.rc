@@ -1,0 +1,6 @@
+set smtp-use-starttls
+set smtp=smtp://$SMTP_SERVER:$SMTP_PORT
+set smtp-auth=login
+set smtp-auth-user=$EMAIL
+set smtp-auth-password=$MAILX_PASSWORD
+set from=$EMAIL
